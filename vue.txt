@@ -1,0 +1,44 @@
+<script>
+export default {
+  data() {
+    return {
+      items: ["вода", "мясо", "молоко", "хлеб", "яйцо"],
+      inputVal: '',
+      message: 'Я БубЫлДа',
+      p: 'Наведи на любой элемент из списка курсором на пару секунд, чтобы увидеть динамически связанное значение title!'
+    };
+  },
+  methods: {
+    addItem() {
+      if (this.items.map(item => item.toLowerCase() !== this.inputVal.toLowerCase().trim()).every((item) => item === true) && this.inputVal.trim()) {
+        this.items.push(this.inputVal);
+        this.inputVal = ""
+      }
+    },
+  },
+};
+</script>
+
+
+<template>
+  <input v-model="inputVal" type="text" placeholder="Введите текст">
+        <button @click="addItem">Добавить текст</button>
+        <ul>
+          <li v-for="item in items" :key="item"  v-bind:title="item">{{ item }}</li>
+        </ul>
+  <div v-bind:title="p" id="app-2">
+        <span>
+          Наведи на любой элемент из списка курсором на пару секунд,
+          чтобы увидеть динамически связанное значение title!
+        </span>
+      </div>
+  <p  v-bind:title="message">{{ message }}</p>
+  <input v-model="message">
+</template>
+
+
+<style>
+
+</style>
+  
+
